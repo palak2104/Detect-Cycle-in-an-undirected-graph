@@ -1,0 +1,24 @@
+class Solution {
+    bool CycleDfs(int node,int par,vector<int>&vis,vector<int>adj[]){
+       vis[node]=1;
+       for(auto it:adj[node]){
+           if(!vis[it]){
+          CycleDfs(it,node,vis,adj);
+           }
+          else if(it!=par) return true;
+       }
+       return false;
+    }
+public:
+	bool isCycle(int n, vector<int>adj[]){
+	    // Code here
+	    vector<int>vis(n+1,0);
+	    for(int i=0;i<n;i++){
+	        if(!vis[i]){
+	            if(CycleDfs(i,-1,vis,adj))
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+};
